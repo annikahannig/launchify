@@ -1,0 +1,15 @@
+{
+  "name": "autoupdate-launcher",
+  "version": "1.0.0",
+  "description": "Autoupdating launcher with gpg signed packages.",
+  "main": "launcher/launcher.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "autoupdate",
+    "launcher"
+  ],
+  "author": "Matthias Hannig",
+  "license": "MIT"
+}
