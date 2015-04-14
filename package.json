@@ -1,5 +1,5 @@
 {
-  "name": "autoupdate-launcher",
+  "name": "launchfit",
   "version": "1.0.0",
   "description": "Autoupdating launcher with gpg signed packages.",
   "main": "launcher/launcher.js",

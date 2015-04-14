@@ -11,7 +11,8 @@
     "basic_auth": {
       "username": "my user",
       "password": "myp455W0rD"
-    }
+    },
+
     "gpg": {
       "key": "DA9A7CE7"
     }
