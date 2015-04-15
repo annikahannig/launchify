@@ -58,7 +58,7 @@ Options:
 ## Deploy an application
     
     $ mkdir my-app
-    $ launchfit http://updates.example.com/app-updates/
+    $ launchify http://updates.example.com/app-updates/
     
 This will download the current application version
 and install it into the current folder.
