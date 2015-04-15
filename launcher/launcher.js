@@ -27,12 +27,16 @@ var actions = {
   // 'start':   cli_exec 
 };
 
-// Is argv an url?
-if(typeof(action) === 'string' && action.match(/^https?:\/\//)){
-  // Run download action.
-  cli_download(argv);
-}
-else {
+// Action is present?
+if(typeof(action) === 'string') {
+ 
+  // Is argv an url?
+  if(action.match(/^https?:\/\//)){
+    cli_download(argv);
+  }
+  else if(action === 'init') {
+    cli_init(argv);
+  }
 
 }
 

@@ -12,6 +12,7 @@
 var path        = require('path');
 var inquirer    = require('inquirer');
 var logSymbols  = require('log-symbols');
+var gpgKeys     = require('../gpg/keys');
 
 // == Helper
 
@@ -20,7 +21,7 @@ var logSymbols  = require('log-symbols');
  * directory.
  */
 var suggestProjectName = function() {
-  var name = path.dirname(process.cwd());
+  var name = path.basename(process.cwd());
   return name;
 };
 
@@ -30,31 +31,54 @@ var init = function(argv) {
 
   var projectName = suggestProjectName();
 
-  // Ask about this project
-  var options = [
-    {
-      type: 'input',
-      name: 'name',
-      message: 'The name of your project',
-      default: projectName
-    },
-    {
-      type: 'input',
-      name: 'exec',
-      message: 'The command to launch your app',
-      default: './bin/'+projectName
-    },
-    {
-      type: 'input',
-      name: 'gpgKeyId',
-      message: 'The id (short hex hash) of your signing gpg key'
-    }
-  ];
+  // Get gpg signgin keys
+  var siginingKeys = gpgKeys.secret()
+    .then(function(keys){
+
+      // Ask about this project
+      var options = [
+        {
+          type: 'input',
+          name: 'name',
+          message: 'The name of your project',
+          default: projectName
+        },
+        {
+          type: 'input',
+          name: 'exec',
+          message: 'The command to launch your app',
+          default: './bin/'+projectName
+        },
+        {
+          type: 'list',
+          name: 'gpgKeyId',
+          message: 'The signing gpg key',
+          choices: keys.map(function(key){
+            return {
+              name:  key.id + ' ' + key.uid,
+              value: key.id
+            };
+          })
+        },
+        {
+          type: 'confirm',
+          name: 'confirmed',
+          default: true,
+          message: 'Looks good?'
+        }
+      ];
+      
+      inquirer.prompt(options, function(result) {
+        console.log(result);
+      });
+      
+    });
+
 
   // Create new project file from template.
 
 };
 
 // == Export module
-module.export = init;
+module.exports = init;
 
