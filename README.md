@@ -41,7 +41,7 @@ hexadecimal characters.
 
 ## App configuration
 
-An app is configured by placing a `launchfit.yml` into it's root directory.
+An app is configured by placing a `launchify.yml` into it's root directory.
 
 Options:
 
