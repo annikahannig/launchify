@@ -7,8 +7,8 @@
  * (c) 2015 Matthias Hannig
  */
 
-process.title = "launchfit"
 
+process.title = "launchfit";
+require('../launcher/launcher');
 
-console.log("Starting launchfit application launcher and updater");
 
