@@ -11,6 +11,7 @@
 var logSymbols = require('log-symbols');
 var Promise    = require('promise');
 var http       = require('http');
+var fs         = require('fs');
 
 /**
  * Download release archive and signature.
@@ -18,9 +19,42 @@ var http       = require('http');
  * @return Promise
  */
 var loadRelease = function(repositoryUrl) {
-  return function(version) {
+  return function(release) {
+    console.log(logSymbols.info + ' Downloading release...');
     var promise = new Promise(function(resolve, reject){
-      resolve(version);
+    
+      var archiveUrl    = repositoryUrl + '/' + release.file;
+      var signatureUrl  = repositoryUrl + '/' + release.file + '.sig';
+
+      var archiveFile   = fs.createWriteStream(
+        process.cwd() + '/tmp/downloads/' + release.file
+      );
+
+      var signatureFile = fs.createWriteStream(
+        process.cwd() + '/tmp/downloads/' + release.file + '.sig'
+      );
+      
+      var reqArchive = http.get(archiveUrl, function(res){
+        if(res.statusCode == 200) {
+          res.pipe(archiveFile);
+        }
+        else {
+          console.error(logSymbols.error + ' Could not download archive.');
+          reject('archive download filed');
+        }
+
+        res.on('end', function(){
+          console.log(logSymbols.success + ' Archive ' + release.file + ' downloaded.');
+        });
+      });
+
+      var reqSignature = http.get(signatureUrl, function(res){
+        res.pipe(signatureFile);
+        res.on('end', function(){
+          console.log(logSymbols.success + ' Archive signature downloaded.');
+        });
+      });
+
     });
     return promise;
   };

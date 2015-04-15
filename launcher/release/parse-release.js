@@ -5,6 +5,8 @@
  * (c) 2015 Matthias Hannig
  */
 
+var logSymbols = require('log-symbols');
+
 var parseRelease = function(text) {
   var result = {};
 
@@ -16,6 +18,8 @@ var parseRelease = function(text) {
       result.file    = tokens[2];
     }
   });
+
+  console.log(logSymbols.success + ' Parsed RELEASE information');
 
   return result;
 };

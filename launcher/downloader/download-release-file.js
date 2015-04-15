@@ -23,7 +23,10 @@ var loadReleaseFile = function(repositoryUrl) {
       if(res.statusCode == 200) { // HTTP OK
         var body = '';
         res.on('data', function(data){ body += data; });
-        res.on('end',  function(){ resolve(body);    });
+        res.on('end',  function(){ 
+          console.log(logSymbols.success + ' Downloaded RELEASE file');
+          resolve(body); 
+        });
       }
       else {
         reject('Download failed. Server sent status code ' + res.statusCode);
