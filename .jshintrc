@@ -1,0 +1,5 @@
+{
+  "camelcase": false,
+  "globalstrict": true,
+  "node": true
+}
