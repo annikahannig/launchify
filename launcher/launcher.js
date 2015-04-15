@@ -11,36 +11,28 @@
  */
 
 // == Load modules
-var argv        = require('yargs').argv;
+var argv          = require('yargs').argv;
+var logSymbols    = require('log-symbols');
 
-var projectInit = require('./cli/init');
-var usage       = require('./cli/usage');
-var download    = require('./cli/download');
-
-var isDeployDir = require('./helper/is-deploy-dir');
+var cli_init      = require('./cli/init');
+var cli_usage     = require('./cli/usage');
+var cli_download  = require('./cli/download');
 
 // == Launcher CLI
 //  Switch actions based on arguments
-var actions = {
-  'init':     projectInit,
-  'help':     usage 
-  /*
-  'download': launcher_download,
-  'start':    launcher_exec
-  */
-};
-
 var action = argv._[0];
-
-var actionRun    = false;
-var actionParams = false;
-
-// Are we within a deploy directory
+var actions = {
+  'init':     cli_init,
+  'help':     cli_usage
+  // 'start':   cli_exec 
+};
 
 // Is argv an url?
 if(typeof(action) === 'string' && action.match(/^https?:\/\//)){
-  actionRun    = 'download';
-  actionParams = action;
+  // Run download action.
+  cli_download(argv);
 }
+else {
 
+}
 

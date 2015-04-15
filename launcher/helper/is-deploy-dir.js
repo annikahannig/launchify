@@ -11,7 +11,7 @@
 var fs = require('fs');
 
 // == Deploy directory check
-var isDeployDir = function(path) {
+var isDeployDir = function(dest) {
 
   // Are the following directories present?
   var requiredDirs = [
