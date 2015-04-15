@@ -1,0 +1,22 @@
+
+#
+# Launchify Config
+#
+
+app:
+  name: "<%= config.appName %>"
+  exec: "<%= config.exec %>"
+
+updates:
+  repository: "<%= config.repositoryUrl %>"
+  interval: "15 min"
+
+  # Keep the last 5 releases
+  keep: 5
+
+  # Release signatures
+  gpg:
+    key: "<%= config.gpg.keyId %>"
+    uid: "<%- config.gpg.uid %>"
+    fingerprint: "<%= config.gpg.fingerprint %>"
+  
