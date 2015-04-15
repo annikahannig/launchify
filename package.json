@@ -18,5 +18,8 @@
     "gulp-util": "^3.0.4",
     "jshint-stylish": "^1.0.1",
     "run-sequence": "^1.0.2"
+  },
+  "dependencies": {
+    "yargs": "^3.7.2"
   }
 }

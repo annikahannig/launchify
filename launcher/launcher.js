@@ -1,30 +1,46 @@
 'use strict';
 
 /**
- * Launchfit Application launcher and Updater
+ * Launchify Application launcher and Updater
  * ------------------------------------------
+ *
+ * Loader CLI
+ * Parse argv and dispatch required action.
  *
  * (c) 2015 Matthias Hannig
  */
 
-var fs      = require('fs');
-var path    = require('path');
+// == Load modules
+var argv        = require('yargs').argv;
 
+var projectInit = require('./cli/init');
+var usage       = require('./cli/usage');
+var download    = require('./cli/download');
 
-// Check if all directories are present
+var isDeployDir = require('./helper/is-deploy-dir');
 
-// Check filesystem and test if there is a 
-// launchfit.yml in current/ present.
+// == Launcher CLI
+//  Switch actions based on arguments
+var actions = {
+  'init':     projectInit,
+  'help':     usage 
+  /*
+  'download': launcher_download,
+  'start':    launcher_exec
+  */
+};
 
-// Parse it.
+var action = argv._[0];
 
-// Nothing there? Check argv.
+var actionRun    = false;
+var actionParams = false;
 
-// is URL? 
+// Are we within a deploy directory
 
-// Great! Download it!
-
-
-
+// Is argv an url?
+if(typeof(action) === 'string' && action.match(/^https?:\/\//)){
+  actionRun    = 'download';
+  actionParams = action;
+}
 
 
