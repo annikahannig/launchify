@@ -37,6 +37,12 @@ if(typeof(action) === 'string') {
   else if(action === 'init') {
     cli_init(argv);
   }
+  else { // display help text
+    cli_usage(argv);
+  }
 
 }
-
+else {
+  // For now: display help text
+  cli_usage(argv);
+}
