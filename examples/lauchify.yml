@@ -12,9 +12,6 @@ app:
 
 updates:
   repository: "http://updates.example.com/app-updates"
-  basic_auth:
-    username: "user"
-    password: "myp4s5W0rd"
   
   gpg:
     key: "D1AFCE1"
