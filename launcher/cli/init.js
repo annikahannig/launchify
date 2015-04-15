@@ -9,9 +9,12 @@
 
 
 // == Load libraries
+var fs          = require('fs');
 var path        = require('path');
 var inquirer    = require('inquirer');
 var logSymbols  = require('log-symbols');
+
+// == Load modules
 var gpgKeys     = require('../gpg/keys');
 
 // == Helper
@@ -28,8 +31,26 @@ var suggestProjectName = function() {
 
 // == Initialize launchify project
 var init = function(argv) {
-
   var projectName = suggestProjectName();
+  var configFilename = 'launchify.yml';
+
+  // Check if config file exists
+  if(fs.existsSync(configFilename)) {
+    // Ask if we want to overwrite config
+    inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'overwrite',
+        default: false,
+        message: 'A launchify configuration exists. Do you want to create a new one?'
+      }
+    ], function(result){
+      if(result.overwrite == false) {
+        console.log('Aborting.');
+        process.exit(0);
+      }
+    });
+  }
 
   // Get gpg signgin keys
   var siginingKeys = gpgKeys.secret()
@@ -39,7 +60,7 @@ var init = function(argv) {
       var options = [
         {
           type: 'input',
-          name: 'name',
+          name: 'appName',
           message: 'The name of your project',
           default: projectName
         },
@@ -47,6 +68,12 @@ var init = function(argv) {
           type: 'input',
           name: 'exec',
           message: 'The command to launch your app',
+          default: './bin/'+projectName
+        },
+        {
+          type: 'input',
+          name: 'repositoryUrl',
+          message: 'App update repository url',
           default: './bin/'+projectName
         },
         {
@@ -69,14 +96,10 @@ var init = function(argv) {
       ];
       
       inquirer.prompt(options, function(result) {
+        // Create new project file from template.
         console.log(result);
       });
-      
     });
-
-
-  // Create new project file from template.
-
 };
 
 // == Export module
