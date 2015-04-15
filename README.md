@@ -46,14 +46,14 @@ An app is configured by placing a `launchify.yml` into it's root directory.
 Options:
 
 * `app`
-* * `.exec`     - Run the app by executing this in the app working directory ./app.
-* * `.forever`  - True if the app should be automaticaly restarted
-* * `.kill`     - Kill option (for graceful shutdown)
+  * `.exec`     - Run the app by executing this in the app working directory ./app.
+  * `.forever`  - True if the app should be automaticaly restarted
+  * `.kill`     - Kill option (for graceful shutdown)
 * `updates`
-* * `.server` - Where to pull the updates from
-* * `.keep`   - False, all old releases will be discareded. Or number of kept releases.
-* * `.gpg`
-* * * `.key` - The short hash / id of the signing GPG key.
+  * `.server` - Where to pull the updates from
+  * `.keep`   - False, all old releases will be discareded. Or number of kept releases.
+  * `.gpg`
+    * `.key` - The short hash / id of the signing GPG key.
 
 ## Deploy an application
     
