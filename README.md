@@ -22,10 +22,10 @@ repository structure:
 
 And versioning information:
 
-    /app-updates/VERSION
+    /app-updates/RELEASE
 
 
-## `VERSION` file format
+## `RELEASE` file format
 
 This is a first draft.
 Format is plaintext and contains following information:
@@ -65,7 +65,7 @@ and install it into the current folder.
 
 ## Updates
 
-The updater will periodicaly check the `VERSION` file as configured
+The updater will periodicaly check the `RELEASE` file as configured
 in `config/app.json`, will download the current version
 and launch the app.
 
