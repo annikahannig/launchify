@@ -34,7 +34,8 @@ var init = function(dest) {
     'var/log/',
     'var/run/',
     'releases',
-    'tmp/'
+    'tmp/downloads',
+    'tmp/release'
   ];
 
   directories.forEach(function(dir){

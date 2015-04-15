@@ -19,50 +19,16 @@ var fs         = require('fs');
 var Release = require('../release/release');
 
 // == Helper
-
-/**
- * Load RELEASE information
- * @return Promise
- */
-var loadReleaseFile = function(repositoryUrl) {
-  var promise = new Promise(function(resolve, reject) {
-    var req = http.get( repositoryUrl + '/RELEASE', function(res) {
-      if(res.statusCode == 200) { // HTTP OK
-        var body = '';
-        res.on('data', function(data){ body += data; });
-        res.on('end',  function(){ resolve(body);    });
-      }
-      else {
-        reject('Download failed. Server did sent status code ' + res.statusCode);
-      }
-    });
-
-    req.on('error', function(err) {
-      // Display error message
-      console.error(
-        logSymbols.error + ' Could not download RELEASE - ' + err
-      );
-      reject(err);
-    });
-
-  });
-  return promise;
-};
-
+var loadReleaseFile = require('./download-release-file');
+var loadRelease     = require('./download-release');
 
 // == Download from repository
 var download = function(repositoryUrl) {
-  var promise = new Promise(function(resolve, reject) {
-
-    // Get version from server
-    loadReleaseFile(repositoryUrl)
-      .then(Release.parse)
-      .then(function(version) {
-        console.log(version);
-      });
-
-  });
-  return promise; 
+  // Get version and files from server
+  var promise = loadReleaseFile(repositoryUrl)
+    .then(Release.parse())
+    .then(loadRelease(repositoryUrl));
+  return promise;
 };
 
 // == Export module

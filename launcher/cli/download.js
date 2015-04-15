@@ -31,10 +31,6 @@ var cli_download = function(argv) {
   download(repositoryUrl)
     .then(function(release){
       console.log(release);
-      return release;
-    })
-    .then(function(wat) {
-      console.log(wat);
     });
 
 };
