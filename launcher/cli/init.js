@@ -11,8 +11,10 @@
 // == Load libraries
 var fs          = require('fs');
 var path        = require('path');
+var ejs         = require('ejs');
 var inquirer    = require('inquirer');
 var logSymbols  = require('log-symbols');
+var _           = require('underscore');
 
 // == Load modules
 var gpgKeys     = require('../gpg/keys');
@@ -34,23 +36,13 @@ var init = function(argv) {
   var projectName = suggestProjectName();
   var configFilename = 'launchify.yml';
 
-  // Check if config file exists
-  if(fs.existsSync(configFilename)) {
-    // Ask if we want to overwrite config
-    inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'overwrite',
-        default: false,
-        message: 'A launchify configuration exists. Do you want to create a new one?'
-      }
-    ], function(result){
-      if(result.overwrite == false) {
-        console.log('Aborting.');
-        process.exit(0);
-      }
-    });
-  }
+  // Get config template
+  var configTmplSrc = fs.readFileSync(
+    path.join(__dirname, '../../templates', 'launchify.yml.ejs'),
+    { 'encoding': 'utf8' }
+  );
+
+  var configTmpl = ejs.compile(configTmplSrc);
 
   // Get gpg signgin keys
   var siginingKeys = gpgKeys.secret()
@@ -73,8 +65,7 @@ var init = function(argv) {
         {
           type: 'input',
           name: 'repositoryUrl',
-          message: 'App update repository url',
-          default: './bin/'+projectName
+          message: 'App update repository url'
         },
         {
           type: 'list',
@@ -97,7 +88,21 @@ var init = function(argv) {
       
       inquirer.prompt(options, function(result) {
         // Create new project file from template.
-        console.log(result);
+        var gpgKey = _.findWhere(keys, { id: result.gpgKeyId });
+
+        result.gpg = {
+          keyId:       gpgKey.id,
+          uid:         gpgKey.uid,
+          fingerprint: gpgKey.fingerprint
+        };
+
+        var configYml = configTmpl({
+          config: result
+        });
+        
+        fs.writeFile( configFilename, configYml, { encoding: 'utf8' } );
+        
+        console.log( logSymbols.success + ' Launchify configuration created.' );
       });
     });
 };
