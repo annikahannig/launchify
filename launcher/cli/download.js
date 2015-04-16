@@ -15,6 +15,7 @@ var isDeployDir     = require('../helper/is-deploy-dir');
 var initDirectories = require('../directories/init');
 
 var download        = require('../downloader/download');
+var unpack          = require('../archiver/unpack');
 // var install         = require('../release/install');
 
 // == Action: Download release and initialize deploy directory.
@@ -29,6 +30,7 @@ var cli_download = function(argv) {
 
   // Start (and verify) download
   download(repositoryUrl)
+    .then(unpack())
     .then(function(release){
       console.log(release);
     });

@@ -23,9 +23,11 @@
   "dependencies": {
     "chalk": "^1.0.0",
     "ejs": "^2.3.1",
+    "glob": "^5.0.5",
     "inquirer": "^0.8.2",
     "log-symbols": "^1.0.2",
     "mkdirp": "^0.5.0",
+    "mv": "^2.0.3",
     "progress": "^1.1.8",
     "promise": "^7.0.0",
     "remove": "^0.1.5",

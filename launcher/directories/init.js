@@ -39,7 +39,7 @@ var init = function(dest) {
   ];
 
   directories.forEach(function(dir){
-    mkdirp(path.join(dest, dir));
+    mkdirp.sync(path.join(dest, dir));
   });
 
 };
