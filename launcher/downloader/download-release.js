@@ -74,7 +74,7 @@ var downloadFile = function( filename, url ) {
  */
 var loadRelease = function(repositoryUrl) {
   return function(release) {
-    console.log(logSymbols.info + ' Downloading reelease archive');
+    console.log(logSymbols.info + ' Downloading release archive');
     var promise = new Promise(function(resolve, reject){
       
       // Download release
