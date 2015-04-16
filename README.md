@@ -8,8 +8,8 @@
 ## Design considerations
 
 * Keep it simple.
-* Use whats there.
-* Insert something here.
+* Make it easy to use.
+* Let it grow.
 
 ## Repository layout
 
