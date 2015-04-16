@@ -35,7 +35,9 @@ var cli_download = function(argv) {
     .then(verify())
     .then(install())
     .then(function(release){
-      console.log(release);
+    }, 
+    function(err) {
+      console.log(err);
     });
 
 };

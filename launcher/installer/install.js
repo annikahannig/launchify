@@ -9,8 +9,47 @@
  */
 
 // == Libraries
+var Promise = require('promise');
+var remove  = require('remove');
+var mkdirp  = require('mkdirp');
+var sym     = require('log-symbols');
+var mv      = require('mv');
+var fs      = require('fs');
 
-var remove = require('remove');
-var sym    = require('log-symbols');
+// == Modules
 
+// == Install
+var install = function() {
+  return function(release) {
+
+    var currentSymlink = process.cwd() + '/current';
+    var tmpRelease     = process.cwd() + '/tmp/release';
+    var destRelease    = process.cwd() + '/releases/' +
+      release.config.app.name + '-' +
+      release.version;
+
+    // Remove version if exists
+    remove.removeSync(destRelease, {ignoreMissing: true});
+
+    // Move release
+    mv(tmpRelease, destRelease, function(err) {
+      console.log(err);
+    });
+    console.log(
+      sym.success + ' Installed release: ' +
+      release.config.app.name + '-' + release.version 
+    );
+
+    // recreate symlink
+    remove.removeSync(currentSymlink, { ignoreMissing: true });
+    fs.symlinkSync(destRelease, currentSymlink);
+
+    console.log( sym.success + ' Created symlink' );
+    
+    return release;
+  };
+};
+
+// == Export
+module.exports = install;
 

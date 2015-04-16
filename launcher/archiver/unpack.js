@@ -15,6 +15,7 @@ var Targz      = require('tar.gz');
 var mv         = require('mv');
 
 // == Modules
+var Config     = require('../config/yaml');
 var findRoot   = require('../release/find-root');
 
 // == Helper
@@ -53,6 +54,10 @@ var unpack = function() {
             ' Found app root in: ' + 
             releaseRoot
           );
+
+          // Parse configuration
+          var launchifyConfig = new Config(releaseRoot + '/launchify.yml');
+          release.config      = launchifyConfig;
 
           // move directory
           mv(releaseRoot, tmpRelease, function(err) {
