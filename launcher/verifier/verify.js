@@ -22,15 +22,19 @@ var verify = function() {
     var releaseArchive = process.cwd() + '/tmp/downloads/' + release.file;
     var releaseSig     = releaseArchive + '.sig';
   
-    var launchifyConfig     = new Config(tmpRelease + '/launchify.yml');
-    var expectedFingerprint = launchifyConfig.updates.gpg.fingerprint;
+    var expectedFingerprint = release.config.updates.gpg.fingerprint;
 
     var promise = new Promise(function(resolve, reject) {
       gpgVerifyFile(releaseArchive, expectedFingerprint)
         .then(
           function(result){ 
-            console.log( sym.success + ' Valid signature from: ' + result.uid );
-            console.log( '  Fingerprint: ' + result.fingerprint );
+            console.log( sym.success +
+              ' Valid signature from: '  + result.uid         );
+            console.log(
+              '           Fingerprint: ' + result.fingerprint );
+            console.log( 
+              '              SignedAt: ' + result.signedAt    );
+
             release.verification = result;
             resolve(release);
           },
