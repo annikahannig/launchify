@@ -12,7 +12,6 @@
 // == Load libraries
 var logSymbols = require('log-symbols');
 var Promise    = require('promise');
-var http       = require('http');
 var fs         = require('fs');
 
 // == Modules

@@ -9,7 +9,7 @@
 // == Load libraries
 var logSymbols = require('log-symbols');
 var Promise    = require('promise');
-var http       = require('http');
+var request    = require('request');
 
 // == Download release file
 
@@ -19,14 +19,10 @@ var http       = require('http');
  */
 var loadReleaseFile = function(repositoryUrl) {
   var promise = new Promise(function(resolve, reject) {
-    var req = http.get( repositoryUrl + '/RELEASE', function(res) {
-      if(res.statusCode == 200) { // HTTP OK
-        var body = '';
-        res.on('data', function(data){ body += data; });
-        res.on('end',  function(){ 
-          console.log(logSymbols.success + ' Downloaded RELEASE file');
-          resolve(body); 
-        });
+    var req = request.get( repositoryUrl + '/RELEASE', function(error, res, body) {
+      if(!error && res.statusCode == 200) { // HTTP OK
+        console.log(logSymbols.success + ' Downloaded RELEASE file');
+        resolve(body); 
       }
       else {
         reject('Download failed. Server sent status code ' + res.statusCode);
