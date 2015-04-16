@@ -17,8 +17,7 @@ var initDirectories = require('../directories/init');
 var download        = require('../downloader/download');
 var unpack          = require('../archiver/unpack');
 var verify          = require('../verifier/verify');
-
-// var install         = require('../release/install');
+var install         = require('../installer/install');
 
 // == Action: Download release and initialize deploy directory.
 var cli_download = function(argv) {
@@ -34,6 +33,7 @@ var cli_download = function(argv) {
   download(repositoryUrl)
     .then(unpack())
     .then(verify())
+    .then(install())
     .then(function(release){
       console.log(release);
     });

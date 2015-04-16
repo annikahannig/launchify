@@ -31,6 +31,7 @@ var verify = function() {
           function(result){ 
             console.log( sym.success + ' Valid signature from: ' + result.uid );
             console.log( '  Fingerprint: ' + result.fingerprint );
+            release.verification = result;
             resolve(release);
           },
           function(err){
