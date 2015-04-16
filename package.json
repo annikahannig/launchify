@@ -2,6 +2,7 @@
   "name": "launchify",
   "version": "1.0.0",
   "description": "Autoupdating launcher with gpg signed packages.",
+  "repository": "https://github.com/mhannig/launchify",
   "main": "launcher/launcher.js",
   "scripts": {
     "test": "gulp lint"
@@ -27,7 +28,9 @@
     "mkdirp": "^0.5.0",
     "progress": "^1.1.8",
     "promise": "^7.0.0",
+    "remove": "^0.1.5",
     "request": "^2.55.0",
+    "tar.gz": "^0.1.1",
     "underscore": "^1.8.3",
     "yargs": "^3.7.2"
   }
