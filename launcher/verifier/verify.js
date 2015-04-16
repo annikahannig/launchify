@@ -8,7 +8,8 @@
  */
 
 // == Libraries
-var sym = require('log-symbols');
+var sym     = require('log-symbols');
+var Promise = require('promise');
 
 // == Modules
 var Config         = require('../config/yaml');
@@ -24,9 +25,21 @@ var verify = function() {
     var launchifyConfig     = new Config(tmpRelease + '/launchify.yml');
     var expectedFingerprint = launchifyConfig.updates.gpg.fingerprint;
 
-    
+    var promise = new Promise(function(resolve, reject) {
+      gpgVerifyFile(releaseArchive, expectedFingerprint)
+        .then(
+          function(result){ 
+            console.log( sym.success + ' Valid signature from: ' + result.uid );
+            console.log( '  Fingerprint: ' + result.fingerprint );
+            resolve(release);
+          },
+          function(err){
+            console.error( sym.error + ' Release verification error: ' + err );
+            reject(err);  
+          });
+    });  
 
-    return release;
+    return promise;
   };
     
 };
