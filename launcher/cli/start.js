@@ -20,6 +20,15 @@ var start = function(argv) {
     return false;
   }
 
+  console.log( 
+    sym.success + ' Found installed app: ' + release.app.name +
+    ' (' + release.version + ')'
+  );
+  
+  console.log(
+    sym.info + ' Checking for updates.'
+  );
+
   return true;
 };
 
