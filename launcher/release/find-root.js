@@ -12,9 +12,9 @@ var path = require('path');
 var glob = require('glob');
 
 var findRoot = function(base) {
-  
   var files = glob.sync(base + '/**/launchify.yml');
   var file = files[0];
+
   if(file) {
     var root = path.dirname(file);
     return root;
