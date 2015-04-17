@@ -10,6 +10,7 @@ var sym = require('log-symbols');
 
 // == Modules
 var currentRelease = require('../release/current-release');
+var every          = require('../scheduler/every');
 
 // == Launchify main
 var start = function(argv) {
@@ -25,9 +26,15 @@ var start = function(argv) {
     ' (' + release.version + ')'
   );
   
+  // Install update scheduler
   console.log(
-    sym.info + ' Checking for updates.'
+    sym.info + ' Checking for updates every: ' + release.updates.interval
   );
+  every(release.updates.interval, function(){
+    console.log(' UPDATE CHECK ');
+  });
+
+  // Check for update now.
 
   return true;
 };
