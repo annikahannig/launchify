@@ -10,6 +10,9 @@
  * (c) 2015 Matthias Hannig
  */
 
+// == Load package json
+var pkg = require('../package.json');
+
 // == Load modules
 var argv          = require('yargs').argv;
 var logSymbols    = require('log-symbols');
@@ -17,6 +20,7 @@ var logSymbols    = require('log-symbols');
 var cli_init      = require('./cli/init');
 var cli_usage     = require('./cli/usage');
 var cli_download  = require('./cli/download');
+var cli_start     = require('./cli/start');
 
 // == Launcher CLI
 //  Switch actions based on arguments
@@ -26,6 +30,13 @@ var actions = {
   'help':     cli_usage
   // 'start':   cli_exec 
 };
+
+// Print header
+console.log(
+  'Launchify ' + pkg.version +
+  '                               ' +
+  '(c) 2015 Matthias Hannig'
+);
 
 // Action is present?
 if(typeof(action) === 'string') {
@@ -43,6 +54,9 @@ if(typeof(action) === 'string') {
 
 }
 else {
-  // For now: display help text
-  cli_usage(argv);
+  if(cli_start(argv) === false) {
+    // something was wrong. most likely the current working
+    // directory is not a launchify working directory.
+    cli_usage(argv);
+  }
 }
