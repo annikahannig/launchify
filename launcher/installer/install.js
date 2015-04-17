@@ -33,7 +33,9 @@ var install = function() {
 
     // Move release
     mv(tmpRelease, destRelease, function(err) {
-      console.log( sym.error + ' ' + err);
+      if(err) {
+        console.log( sym.error + ' ' + err);
+      }
     });
     console.log(
       sym.success + ' Installed release: ' +
