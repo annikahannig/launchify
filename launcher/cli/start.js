@@ -12,6 +12,8 @@ var sym = require('log-symbols');
 var currentRelease = require('../release/current-release');
 var every          = require('../scheduler/every');
 
+var cli_update     = require('./update');
+
 // == Launchify main
 var start = function(argv) {
   var release = currentRelease();
@@ -31,10 +33,11 @@ var start = function(argv) {
     sym.info + ' Checking for updates every: ' + release.updates.interval
   );
   every(release.updates.interval, function(){
-    console.log(' UPDATE CHECK ');
+    cli_update(argv);
   });
 
   // Check for update now.
+  cli_update(argv);
 
   return true;
 };

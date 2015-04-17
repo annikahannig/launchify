@@ -14,7 +14,8 @@ var logSymbols    = require('log-symbols');
 var isDeployDir     = require('../helper/is-deploy-dir'); 
 var initDirectories = require('../directories/init');
 
-var download        = require('../downloader/download');
+var downloadMeta    = require('../downloader/download-release-meta');
+var downloadRelease = require('../downloader/download-release');
 var unpack          = require('../archiver/unpack');
 var verify          = require('../verifier/verify');
 var install         = require('../installer/install');
@@ -30,7 +31,8 @@ var cli_download = function(argv) {
   initDirectories(deployDirectory);
 
   // Start (and verify) download
-  download(repositoryUrl)
+  downloadMeta(repositoryUrl)
+    .then(downloadRelease(repositoryUrl))
     .then(unpack())
     .then(verify())
     .then(install())
