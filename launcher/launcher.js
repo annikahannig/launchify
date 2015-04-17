@@ -32,7 +32,7 @@ if(typeof(action) === 'string') {
  
   // Is argv an url?
   if(action.match(/^https?:\/\//)){
-    cli_download(argv);
+    cli_download(argv); // Download and initialize app
   }
   else if(action === 'init') {
     cli_init(argv);
