@@ -16,19 +16,17 @@ var fs         = require('fs');
 
 // == Helper
 var loadReleaseFile = require('./download-release-file');
-var loadRelease     = require('./download-release');
-
 var parseRelease    = require('../release/parse-release');
 
-// == Download from repository
-var download = function(repositoryUrl) {
+// == Download RELEASE from repository and
+//    parse it.
+var downloadReleaseMeta = function(repositoryUrl) {
   // Get version and files from server
   var promise = loadReleaseFile(repositoryUrl)
-    .then(parseRelease())
-    .then(loadRelease(repositoryUrl));
+    .then(parseRelease());
   return promise;
 };
 
 // == Export module
-module.exports = download;
+module.exports = downloadReleaseMeta;
 
