@@ -42,7 +42,7 @@ var compare = function(a, b) {
 
 // == Newer 
 var isNewer = function(a,b) {
-  return compare(a,b) == 1;
+  return compare(a,b) === 1;
 };
 
 // == Older
@@ -58,6 +58,6 @@ var isEqual = function(a,b) {
 // == Export
 module.exports = compare;
 module.exports.isNewer = isNewer;
-module.exports.isNewer = isOlder;
-module.exports.isNewer = isEqual;
+module.exports.isOlder = isOlder;
+module.exports.isEqual = isEqual;
 
