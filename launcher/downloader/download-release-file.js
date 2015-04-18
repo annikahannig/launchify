@@ -21,7 +21,6 @@ var loadReleaseFile = function(repositoryUrl) {
   var promise = new Promise(function(resolve, reject) {
     var req = request.get( repositoryUrl + '/RELEASE', function(error, res, body) {
       if(!error && res.statusCode == 200) { // HTTP OK
-        console.log(logSymbols.success + ' Downloaded RELEASE file');
         resolve(body); 
       }
       else {
