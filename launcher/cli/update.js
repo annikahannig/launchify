@@ -10,7 +10,8 @@
  */
 
 // == Libraries
-var sym = require('log-symbols');
+var Promise = require('promise');
+var sym     = require('log-symbols');
 
 // == Modules
 var currentRelease = require('../release/current-release');
@@ -28,32 +29,39 @@ var install         = require('../installer/install');
 var cli_update = function(argv) {
   var _release = currentRelease();
   var repositoryUrl = _release.updates.repository;
-  
+
   console.log( sym.info + ' Checking for updates at: ' + new Date() );
   
   // Start (and verify) download
-  downloadMeta(repositoryUrl)
-    .then(needsUpdate(_release.version))
-    .then(downloadRelease(repositoryUrl))
-    .then(unpack())
-    .then(verify())
-    .then(install())
-    .then(function(release){
-      console.log(sym.success + 
-        ' ' + _release.app.name + ' successfully updated: ' +
-        _release.version + ' -> ' + release.version
-      );
-    }, 
-    function(err) {
-      if(err == 'release_is_up_to_date') {
-        // Ignore this. Everything is up to date.
-        // Don't spam logfile.
-      }
-      else {
-        console.log(sym.error + ' ' + err);
-      }
-    });
+  var promise = new Promise(function(resolve, reject) {
+    downloadMeta(repositoryUrl)
+      .then(needsUpdate(_release.version))
+      .then(downloadRelease(repositoryUrl))
+      .then(unpack())
+      .then(verify())
+      .then(install())
+      .then(function(release){
+        console.log(sym.success + 
+          ' ' + _release.app.name + ' successfully updated: ' +
+          _release.version + ' -> ' + release.version
+        );
 
+        resolve(release);
+      }, 
+      function(err) {
+        if(err == 'release_is_up_to_date') {
+          // Ignore this. Everything is up to date.
+          // Don't spam logfile.
+        }
+        else {
+          console.log(sym.error + ' ' + err);
+        }
+
+        reject(err);
+      });
+  });
+  
+  return promise;
 };
 
 // == Export

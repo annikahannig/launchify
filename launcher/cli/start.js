@@ -14,6 +14,8 @@ var every          = require('../scheduler/every');
 
 var cli_update     = require('./update');
 
+var cli_run        = require('./run');
+
 // == Launchify main
 var start = function(argv) {
   var release = currentRelease();
@@ -27,17 +29,27 @@ var start = function(argv) {
     sym.success + ' Found installed app: ' + release.app.name +
     ' (' + release.version + ')'
   );
+
+  // Launch app
+  var child = cli_run(argv); 
   
   // Install update scheduler
   console.log(
     sym.info + ' Checking for updates every: ' + release.updates.interval
   );
   every(release.updates.interval, function(){
-    cli_update(argv);
+    cli_update(argv)
+      .then(function(){
+        child.restart();
+      });
   });
 
   // Check for update now.
-  cli_update(argv);
+  cli_update(argv)
+    .then(function(){
+      child.restart();
+    });
+
 
   return true;
 };

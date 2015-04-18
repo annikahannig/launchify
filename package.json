@@ -23,6 +23,7 @@
   "dependencies": {
     "chalk": "^1.0.0",
     "ejs": "^2.3.1",
+    "forever-monitor": "^1.5.2",
     "glob": "^5.0.5",
     "inquirer": "^0.8.2",
     "js-yaml": "^3.2.7",
