@@ -1,0 +1,26 @@
+
+#
+# Launchify Config
+# ----------------
+#
+# Generate a launchify configuration by invoking
+# 'launchify init' in your app package directory.
+#
+
+app:
+  name: "lfexample"
+  exec: "./app.sh"
+
+updates:
+  repository: "http://updates.example.com/test-app"
+  interval: "30 minutes 15 seconds"
+
+  # Keep the last 5 releases
+  keep: 5
+
+  # Release signatures
+  gpg:
+    key: "1245AB2D"
+    uid: "My User (Codesign) <user@example.com>"
+    fingerprint: "52164F54A44656124541BBFAD1245AB2D"
+  
