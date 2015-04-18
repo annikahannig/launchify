@@ -29,6 +29,8 @@ var cli_update = function(argv) {
   var _release = currentRelease();
   var repositoryUrl = _release.updates.repository;
   
+  console.log( sym.info + ' Checking for updates at: ' + new Date() );
+  
   // Start (and verify) download
   downloadMeta(repositoryUrl)
     .then(needsUpdate(_release.version))
@@ -44,10 +46,8 @@ var cli_update = function(argv) {
     }, 
     function(err) {
       if(err == 'release_is_up_to_date') {
-        console.log(sym.success + 
-          ' ' + _release.app.name + '(' + _release.version + ') ' +
-          'is up to date.'
-        );
+        // Ignore this. Everything is up to date.
+        // Don't spam logfile.
       }
       else {
         console.log(sym.error + ' ' + err);
