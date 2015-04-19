@@ -1,19 +1,24 @@
 
 # App launcher and autoupdater
 
-    ===============
-    ==== DRAFT ====
-    ===============
+This is an app launcher and autoupdater using
+[forever](https://github.com/foreverjs) as process monitor and
+[gpg](https://www.gnupg.org/) for package verification.
 
-## Design considerations
+## Preparing your app
 
-* Keep it simple.
-* Make it easy to use.
-* Let it grow.
+* Run `launchify init` in your application root directory.
+* Create an application package:
+  * tar cvzf my-app-1.0.tar.gz my-app/
+* Sign the package
+  * gpg -b -u <your key id> my-app-1.0.tar.gz
+
+Upload both files to your repository and update your `RELEASE` file.
 
 ## Repository layout
 
-Given a webserver `http://my-app.example.com/app-updates/` with the following 
+The repository should be located on a webserver like 
+`http://my-app.example.com/app-updates/` with the following 
 repository structure:
 
     /app-updates
@@ -24,20 +29,13 @@ And versioning information:
 
     /app-updates/RELEASE
 
-
 ## `RELEASE` file format
 
-This is a first draft.
-Format is plaintext and contains following information:
+The `RELEASE` file contains the following plaintext information:
 
     CURRENT 1.23.42b my-app-gnu-linux-1.23.42b.tar.gz
     
-Optional:
-    RELEASE icecream-soda-popsticle
-
-To make things simpler the version string may only contain 
-hexadecimal characters.
-
+The version string may only contain hexadecimal characters.
 
 ## App configuration
 
