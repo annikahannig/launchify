@@ -1,11 +1,14 @@
 {
   "name": "launchify",
   "version": "1.0.0",
-  "description": "Autoupdating launcher with gpg signed packages.",
-  "repository": "https://github.com/mhannig/launchify",
+  "description": "Autoupdating launcher (using forever) with gpg signed packages.",
+  "repository": "mhannig/launchify",
   "main": "launcher/launcher.js",
   "scripts": {
     "test": "gulp lint"
+  },
+  "bin": {
+    "launchify": "bin/launchify"
   },
   "keywords": [
     "autoupdate",
