@@ -45,7 +45,7 @@ var init = function(argv) {
   var configTmpl = ejs.compile(configTmplSrc);
 
   // Get gpg signing keys
-  var siginingKeys = gpgKeys.secret()
+  var signingKeys = gpgKeys.secret()
     .then(function(keys) {
 
       // Ask about this project
