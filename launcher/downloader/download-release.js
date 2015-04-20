@@ -75,7 +75,7 @@ var downloadFile = function( filename, url ) {
 var loadRelease = function(repositoryUrl) {
   return function(release) {
     console.log(logSymbols.info + ' Downloading release archive');
-    var promise = new Promise(function(resolve, reject){
+    var promise = new Promise(function(resolve, reject) {
       
       // Download release
       var archiveUrl       = repositoryUrl + '/' + release.file;
@@ -89,10 +89,10 @@ var loadRelease = function(repositoryUrl) {
         downloadFile(sigFilename,     sigUrl,      false) // no progress
       ])
         .then(
-          function(result){
+          function(result) {
             resolve(release);
           },
-          function(err){
+          function(err) {
             reject(err);
           }
         );

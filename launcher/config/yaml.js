@@ -20,13 +20,13 @@ var Config = function(configFile) {
     );
 
     // Set properties
-    for( var k in properties ){
+    for(var k in properties) {
       var v = properties[k];
       self[k] = v;
     }
   }
   catch(e) {
-    console.error( sym.error + ' Could not load config file.');
+    console.error(sym.error + ' Could not load config file.');
     console.error(e);
   }
 };

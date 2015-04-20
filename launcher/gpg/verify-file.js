@@ -43,9 +43,9 @@ var parseGpgVerifyOutput = function(text) {
 };
 
 // == Verify file
-var verifyFile = function( file, expectedFingerprint ) {
+var verifyFile = function(file, expectedFingerprint) {
   var cmd     = gpg + ' --status-fd=1 --verify ' + file + '.sig';
-  var promise = new Promise(function(resolve, reject){
+  var promise = new Promise(function(resolve, reject) {
     cp.exec(cmd, { env: env }, function(err, stdout, stderr) {
       if(err) { reject(err); return; } // Exit on error
       

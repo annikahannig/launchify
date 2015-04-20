@@ -21,6 +21,7 @@ var path = require('path');
  * Check if directory is empty
  */
 
-
-
+function isEmpty(dir) {
+  return fs.readdir(dir).length === 0;
+}
 

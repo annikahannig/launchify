@@ -9,7 +9,7 @@ var usage = [
   '',
   'Usage: launchify <command | url>',
   '',
-  'where <command> is one of: init, help',
+  'where <command> is one of: init, help, start, stop',
   'where <url> is the url of an app repository.',
   '',
   'launchify init      create a new launchify.yml in your project',
