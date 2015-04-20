@@ -36,7 +36,7 @@ var cli_download = function(argv) {
     .then(unpack())
     .then(verify())
     .then(install())
-    .then(function(release){
+    .then(function(release) {
       console.log(logSymbols.success + ' Application successfully installed.');
     }, 
     function(err) {

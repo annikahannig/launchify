@@ -89,9 +89,9 @@ var parseGpgKeyOutput = function(output) {
 var extractSecretKeys = function() {
   // Execute gpg command
   var cmd     = gpg + ' --list-secret-keys --fingerprint';
-  var promise = new Promise(function(resolve, reject){
+  var promise = new Promise(function(resolve, reject) {
     
-    cp.exec(cmd, { env: env}, function(err, stdout, stderr) {
+    cp.exec(cmd, { env: env }, function(err, stdout, stderr) {
       if(err) { reject(err); return; } // Exit on error
 
       // fullfill promise
@@ -111,8 +111,8 @@ var extractSecretKeys = function() {
 var extracKeys = function() {
   // Execute gpg command
   var cmd     = gpg + ' --list-keys --fingerprint';
-  var promise = new Promise(function(resolve, reject){
-    cp.exec(cmd, { env: env}, function(err, stdout, stderr) {
+  var promise = new Promise(function(resolve, reject) {
+    cp.exec(cmd, { env: env }, function(err, stdout, stderr) {
       if(err) { reject(err); return; } // Exit on error
       var keys = parseGpgKeyOutput(stdout);
       resolve(keys);

@@ -44,9 +44,9 @@ var init = function(argv) {
 
   var configTmpl = ejs.compile(configTmplSrc);
 
-  // Get gpg signgin keys
-  var siginingKeys = gpgKeys.secret()
-    .then(function(keys){
+  // Get gpg signing keys
+  var signingKeys = gpgKeys.secret()
+    .then(function(keys) {
 
       // Ask about this project
       var options = [
@@ -60,7 +60,7 @@ var init = function(argv) {
           type: 'input',
           name: 'exec',
           message: 'The command to launch your app',
-          default: './bin/'+projectName
+          default: './bin/' + projectName
         },
         {
           type: 'input',
@@ -100,9 +100,9 @@ var init = function(argv) {
           config: result
         });
         
-        fs.writeFile( configFilename, configYml, { encoding: 'utf8' } );
+        fs.writeFile(configFilename, configYml, { encoding: 'utf8' });
         
-        console.log( logSymbols.success + ' Launchify configuration created.' );
+        console.log(logSymbols.success + ' Launchify configuration created.');
       });
     });
 };

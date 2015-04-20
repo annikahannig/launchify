@@ -2,7 +2,7 @@
 
 /**
  * Interval parser:
- * Supported units are 'days', 'hours', 'minutes', 'seconds'
+ * Supported units are 'days', 'hours', 'minutes', 'seconds', 'milliseconds'
  *
  * Composites are supported aswell. You can write something like
  * '2 minutes 16 seconds'.
@@ -15,7 +15,7 @@ var parseInterval = function(str) {
   var interval = 0;
   var tokens   = str.split(' ');
 
-  var d   = 0, h = 0, m = 0, s = 0;
+  var d   = 0, h = 0, m = 0, s = 0, ms = 0;
   var val = 0;
 
   tokens.forEach(function(token) {
@@ -25,6 +25,7 @@ var parseInterval = function(str) {
       case 'HOU': h = val; break;
       case 'MIN': m = val; break;
       case 'SEC': s = val; break;
+      case 'MIL': ms = val; break;
       default:
         val = parseFloat(token);
     }
@@ -35,8 +36,9 @@ var parseInterval = function(str) {
     (d*24*60*60) + // Days
     (h*60*60)    + // Hours
     (m*60)       + // Minutes
-    (s))          * // Seconds
-    1000;          // Milliseconds
+    (s))         * // Seconds
+    1000 +
+    ms;          // Milliseconds
 
   return interval;
 };

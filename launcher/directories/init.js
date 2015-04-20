@@ -38,7 +38,7 @@ var init = function(dest) {
     'tmp/release'
   ];
 
-  directories.forEach(function(dir){
+  directories.forEach(function(dir) {
     mkdirp.sync(path.join(dest, dir));
   });
 

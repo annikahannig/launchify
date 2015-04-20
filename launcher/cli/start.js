@@ -19,7 +19,7 @@ var cli_run        = require('./run');
 // == Launchify main
 var start = function(argv) {
   var release = currentRelease();
-  if( !release ) {
+  if(!release) {
     // This is not a working directory.
     // Do nothing. Fast forward to 'usage'
     return false;
@@ -37,7 +37,7 @@ var start = function(argv) {
   console.log(
     sym.info + ' Checking for updates every: ' + release.updates.interval
   );
-  every(release.updates.interval, function(){
+  every(release.updates.interval, function() {
     cli_update(argv)
       .then(function(){
         child.restart();
@@ -46,7 +46,7 @@ var start = function(argv) {
 
   // Check for update now.
   cli_update(argv)
-    .then(function(){
+    .then(function() {
       child.restart();
     });
 

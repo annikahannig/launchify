@@ -30,7 +30,7 @@ var cli_update = function(argv) {
   var _release = currentRelease();
   var repositoryUrl = _release.updates.repository;
 
-  console.log( sym.info + ' Checking for updates at: ' + new Date() );
+  console.log(sym.info + ' Checking for updates at: ' + new Date());
   
   // Start (and verify) download
   var promise = new Promise(function(resolve, reject) {
