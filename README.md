@@ -80,7 +80,7 @@ The launcher will restart the app as needed.
 
 ## Contributing
 
-1. Fork it ( https://github.com/mhannig/angular-bootstrap-gulp/fork )
+1. Fork it ( https://github.com/mhannig/launchify/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
