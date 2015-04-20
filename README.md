@@ -8,10 +8,11 @@ This is an app launcher and autoupdater using
 ## Preparing your app
 
 * Run `launchify init` in your application root directory.
-* Create an application package:
-  * tar cvzf my-app-1.0.tar.gz my-app/
-* Sign the package
-  * gpg -b -u <your key id> my-app-1.0.tar.gz
+  Answer some questions about your app and your configuration
+  will be created.
+
+* Create an application package: `$ tar cvzf my-app-1.0.tar.gz my-app/`
+* Sign the package: `$ gpg -b -u <your key id> my-app-1.0.tar.gz`
 
 Upload both files to your repository and update your `RELEASE` file.
 
@@ -35,9 +36,10 @@ The `RELEASE` file contains the following plaintext information:
 
     CURRENT 1.23.42b my-app-gnu-linux-1.23.42b.tar.gz
     
-The version string may only contain hexadecimal characters.
-
-## Deploy an application
+The version string consisting of MAJOR.MINOR.PATCH may only 
+contain hexadecimal characters.
+ 
+## Deploy your application
     
     $ mkdir my-app
     $ cd my-app && launchify http://updates.example.com/app-updates/
