@@ -6,7 +6,6 @@
  */
 
 var usage = [
-  '',
   'Usage: launchify <command | url>',
   '',
   'where <command> is one of: init, help, start, stop',

@@ -35,7 +35,7 @@ var actions = {
 console.log(
   'Launchify ' + pkg.version +
   '                               ' +
-  '(c) 2015 Matthias Hannig'
+  '(c) 2015 Matthias Hannig\n'
 );
 
 // Action is present?
