@@ -11,7 +11,7 @@ var Promise = require('promise');
 var cp      = require('child_process');
 
 // == Config
-var gpg = '/usr/bin/gpg';
+var gpg = 'gpg';
 var env = {
   'LC_ALL': 'C'
 };
