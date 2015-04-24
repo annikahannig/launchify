@@ -21,6 +21,7 @@ var cli_init      = require('./cli/init');
 var cli_usage     = require('./cli/usage');
 var cli_download  = require('./cli/download');
 var cli_start     = require('./cli/start');
+var cli_script    = require('./cli/script');
 
 // == Launcher CLI
 //  Switch actions based on arguments
@@ -49,7 +50,12 @@ if(typeof(action) === 'string') {
     cli_init(argv);
   }
   else { // display help text
-    cli_usage(argv);
+    // Try to run a user script
+    cli_script(argv).then(function(){}, function(err) {
+      console.error(logSymbols.error + ' Could not run script: ' + err + "\n");
+      // Everything failed. Just show the usage.
+      cli_usage(argv);
+    });
   }
 
 }
