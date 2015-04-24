@@ -11,6 +11,11 @@ app:
   name: "lfexample"
   exec: "./app.sh"
 
+
+scripts:
+  
+    
+
 updates:
   repository: "http://updates.example.com/test-app"
   interval: "30 minutes 15 seconds"

@@ -7,6 +7,10 @@ app:
   name: "<%= config.appName %>"
   exec: "<%= config.exec %>"
 
+scripts:
+  before_symlink:
+    - echo "Release unpacked and verified."
+
 updates:
   repository: "<%= config.repositoryUrl %>"
   interval: "15 min"
