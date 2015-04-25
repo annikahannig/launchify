@@ -13,7 +13,8 @@ app:
 
 
 scripts:
-  
+  hello:
+    - echo "Hello {{launchify.app.name}}!"
     
 
 updates:
