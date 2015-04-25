@@ -12,10 +12,12 @@ var cp      = require('child_process');
 var sym     = require('log-symbols');
 
 // == Modules
-var Config  = require('../config/yaml');
+var Config   = require('../config/yaml');
+var Omniconf = require('../config/omniconf');
 
 // == Helper
 var execCommandList = function(list, cb) {
+  var conf = new Omniconf(process.cwd());
 
   if(list.length === 0) {
     // Run callback when we are done.
@@ -27,6 +29,14 @@ var execCommandList = function(list, cb) {
   var pre = sym.info + ' ' + ts + ': ';
 
   var cmd = list.shift();
+
+  // Replace config variables
+  cmd = cmd.replace(/{{.*?}}/g, function(match) {
+    console.log(match);
+    var attr  = match.substr(2, match.length - 4);
+    var value = conf.get(attr);
+    return value;
+  });
 
   cp.exec(cmd, {
     env: process.env,
