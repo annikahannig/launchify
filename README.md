@@ -61,6 +61,8 @@ Options:
   * `.exec`     - Run the app by executing this in the app working directory ./app.
   * `.kill`     - Kill option (for graceful shutdown)
 
+* `scripts` - See: Scripts
+
 * `updates`
   * `.repository` - Where to pull the updates from
   * `.keep`       - False, all old releases will be discareded. Or number of kept releases.
@@ -69,6 +71,24 @@ Options:
     * `.key` - The short hash / id of the signing GPG key.
     * `.uid` - The signing users GPG uid.
     * `.fingerprint` - The gpg key fingerprint.
+
+## Scripts
+
+You can define scripts within your launchify configuration.
+Each line is a command and will be executed in the current working directory.
+
+Commands may contain variables in Mustache notation. You can reference every JSON or YML file
+in the project directory by a reference path. For example:
+
+    ./my-project/launchify.yml 
+    ./my-project/package.json
+    ./my-project/config/deploy.json
+
+You cann now access values, stored in the files by referencing
+    
+    {{launchify.app.name}} - {{package.version}}
+    
+    {{config.deploy.serverPath}}
 
 
 ## Updates
