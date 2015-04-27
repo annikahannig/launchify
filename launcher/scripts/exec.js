@@ -32,7 +32,6 @@ var execCommandList = function(list, cb) {
 
   // Replace config variables
   cmd = cmd.replace(/{{.*?}}/g, function(match) {
-    console.log(match);
     var attr  = match.substr(2, match.length - 4);
     var value = conf.get(attr);
     return value;
