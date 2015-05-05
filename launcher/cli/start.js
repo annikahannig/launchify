@@ -7,21 +7,45 @@
 
 // == Libraries
 var sym = require('log-symbols');
+var fs  = require('fs');
 
 // == Modules
+var Config         = require('../config/yaml');
 var currentRelease = require('../release/current-release');
 var every          = require('../scheduler/every');
 
 var cli_update     = require('./update');
 
 var cli_run        = require('./run');
+var cli_testrun    = require('./testrun');
 
 // == Launchify main
 var start = function(argv) {
   var release = currentRelease();
   if(!release) {
     // This is not a working directory.
-    // Do nothing. Fast forward to 'usage'
+    // Check if there is a launchify.yml - in that case: 
+    //  -> Parse the file
+    //  -> Run the app.
+    //  -> Assume this is a testrun.
+    var configFile = process.cwd() + '/launchify.yml';
+    try { fs.statSync(configFile); }
+    catch(e) { return false; } // Nope this is not even a test.
+    
+    var config = new Config(configFile);
+   
+    if(config) {
+      console.log(sym.success + ' Found valid launchify configuration' );
+      console.log(sym.success + ' Running app: ' + config.app.name  );
+      console.log(sym.info    +
+        ' Not checking for updates every: ' +
+        config.updates.interval
+      );
+
+      var proc = cli_testrun(config); 
+      return proc;
+    }
+    
     return false;
   }
 
