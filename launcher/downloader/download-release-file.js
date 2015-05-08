@@ -20,7 +20,12 @@ var request    = require('request');
 var loadReleaseFile = function(repositoryUrl) {
   var promise = new Promise(function(resolve, reject) {
     var req = request.get(repositoryUrl + '/RELEASE', function(error, res, body) {
-      if(!error && res.statusCode == 200) { // HTTP OK
+      if(error) {
+        reject(error);
+        return;
+      }
+
+      if(res.statusCode == 200) { // HTTP OK
         resolve(body); 
       }
       else {
