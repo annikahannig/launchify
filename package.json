@@ -1,6 +1,6 @@
 {
   "name": "launchify",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Autoupdating launcher (using forever) with gpg signed packages.",
   "repository": "mhannig/launchify",
   "main": "launcher/launcher.js",
