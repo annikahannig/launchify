@@ -11,7 +11,6 @@
 var logSymbols    = require('log-symbols');
 
 // == Load modules
-var isDeployDir     = require('../helper/is-deploy-dir'); 
 var initDirectories = require('../directories/init');
 
 var downloadMeta    = require('../downloader/download-release-meta');
