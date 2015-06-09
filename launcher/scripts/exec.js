@@ -59,6 +59,18 @@ var execCommandList = function(list, cb) {
 
 };
 
+// == Check if script exists
+var isScriptPresent = function(scriptName) {
+  var configFile = process.cwd() + '/launchify.yml';
+  var config     = new Config(configFile);
+
+  // Check if script exists
+  if( !config.scripts || !config.scripts[scriptName] ) {
+    return false;
+  }
+  return true;
+};
+
 // == Exec script
 var scriptExec = function(scriptName) {
   var configFile = process.cwd() + '/launchify.yml';
@@ -80,6 +92,9 @@ var scriptExec = function(scriptName) {
   return promise;    
 };
 
+
+
 // == Export
 module.exports = scriptExec;
+module.exports.isScriptPresent = isScriptPresent;
 
